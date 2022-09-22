@@ -213,29 +213,21 @@ int selectFunc()
 	return choice;
 }
 
-int selectPriority()
+int selectPriority(const char* str)
 {
 	int choice;
-	printf("¬ведите приоритет: ");
+	printf("%s", str);
 	do {
 		scanf_s("%d", &choice);
 	} while (choice > 5 || choice < 1);
-	printf("\n");
+	//printf("\n");
 	return choice;
 }
 
 void changePriority(Queue1& q1, Queue2& q2, Queue3& q3, Queue4& q4, Queue5& q5)
 {
-	int priority, newPriority;
-	printf("¬ведите приоритет очереди: ");
-	do {
-		scanf_s("%d", &priority);
-	} while (priority > 5 || priority < 1);
-
-	printf("¬ведите новый приоритет: ");
-	do {
-		scanf_s("%d", &newPriority);
-	} while (newPriority > 5 || newPriority < 1);
+	int priority = selectPriority("¬ведите приоритет: ");
+	int newPriority = selectPriority("¬ведите новый приоритет: ");
 	printf("\n");
 
 	switch (priority)
@@ -379,7 +371,8 @@ void loopQueue()
 		case 1:
 			printf("¬ведите размерность нового элемента: ");
 			scanf_s("%d", &tmp);
-			priority = selectPriority();
+			priority = selectPriority("¬ведите приоритет: ");
+			printf("\n");
 			push(q1, q2, q3, q4, q5, tmp, priority);
 			break;
 		case 2:

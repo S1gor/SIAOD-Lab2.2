@@ -158,7 +158,7 @@ void printQueuePrioirity(Queue1 q1, Queue2 q2, Queue3 q3, Queue4 q4, Queue5 q5)
 	printf("\n");
 }
 
-void printCommonQueue(Queue1 q1, Queue2 q2, Queue3 q3, Queue4 q4, Queue5 q5)
+void printCommonQueue(Queue1& q1, Queue2& q2, Queue3& q3, Queue4& q4, Queue5& q5)
 {
 	if (q5.head != NULL)
 		q5.tail->next = q4.head;
@@ -205,7 +205,7 @@ void printCommonQueue(Queue1 q1, Queue2 q2, Queue3 q3, Queue4 q4, Queue5 q5)
 int selectFunc()
 {
 	int choice;
-	printf("1 - Добавить элемент в очередь; 2 - Просмотреть очередь; 3 - Просмотреть общую очередь; 4 - Выбрать очередь; 5 - Выйти\nВыбор:");
+	printf("1 - Добавить элемент в очередь; 2 - Просмотреть очередь; 3 - Просмотреть общую очередь; 4 - Изменить приоритет очереди; 5 - Выйти\nВыбор:");
 	do {
 		scanf_s("%d", &choice);
 	} while (choice > 5 || choice < 1);
@@ -224,6 +224,149 @@ int selectPriority()
 	return choice;
 }
 
+void changePriority(Queue1& q1, Queue2& q2, Queue3& q3, Queue4& q4, Queue5& q5)
+{
+	int priority, newPriority;
+	printf("Введите приоритет очереди: ");
+	do {
+		scanf_s("%d", &priority);
+	} while (priority > 5 || priority < 1);
+
+	printf("Введите новый приоритет: ");
+	do {
+		scanf_s("%d", &newPriority);
+	} while (newPriority > 5 || newPriority < 1);
+	printf("\n");
+
+	switch (priority)
+	{
+	case 1:
+		if (q1.head == NULL)	return;
+
+		switch (newPriority)
+		{
+		case 1:
+			return;
+		case 2:
+			if (q2.head == NULL)
+			{
+				q2.head = q1.head;
+				q1.head = NULL;
+			}
+			else
+			{
+				q2.tail->next = q1.head;
+				q1.head = NULL;
+			}
+			break;
+		case 3:
+			if (q3.head == NULL)
+			{
+				q3.head = q1.head;
+				q1.head = NULL;
+			}
+			else
+			{
+				q3.tail->next = q1.head;
+				q1.head = NULL;
+			}
+			break;
+		case 4:
+			if (q4.head == NULL)
+			{
+				q4.head = q1.head;
+				q1.head = NULL;
+			}
+			else
+			{
+				q4.tail->next = q1.head;
+				q1.head = NULL;
+			}
+			break;
+		case 5:
+			if (q5.head == NULL)
+			{
+				q5.head = q1.head;
+				q1.head = NULL;
+			}
+			else
+			{
+				q5.tail->next = q1.head;
+				q1.head = NULL;
+			}
+			break;
+		}
+		break;
+	case 2:
+		if (q2.head == NULL)	return;
+
+		switch (newPriority)
+		{
+		case 1:
+			if (q1.head == NULL)
+			{
+				q1.head = q2.head;
+				q2.head = NULL;
+			}
+			else
+			{
+				q2.tail->next = q1.head;
+				q1.head = q2.head;
+				q2.head = NULL;
+			}
+			break;
+		case 2:
+			return;
+		case 3:
+			if (q3.head == NULL)
+			{
+				q3.head = q2.head;
+				q2.head = NULL;
+			}
+			else
+			{
+				q3.tail->next = q2.head;
+				q2.head = NULL;
+			}
+			break;
+		case 4:
+			if (q4.head == NULL)
+			{
+				q4.head = q2.head;
+				q2.head = NULL;
+			}
+			else
+			{
+				q4.tail->next = q2.head;
+				q2.head = NULL;
+			}
+			break;
+		case 5:
+			if (q5.head == NULL)
+			{
+				q5.head = q2.head;
+				q2.head = NULL;
+			}
+			else
+			{
+				q5.tail->next = q2.head;
+				q2.head = NULL;
+			}
+			break;
+		}
+		break;
+	case 3:
+		if (q3.head == NULL)	return;
+		break;
+	case 4:
+		if (q4.head == NULL)	return;
+		break;
+	case 5:
+		if (q5.head == NULL)	return;
+		break;
+	}
+}
+
 void loopQueue()
 {
 	Queue1 q1; Queue2 q2; Queue3 q3; Queue4 q4; Queue5 q5;
@@ -240,13 +383,14 @@ void loopQueue()
 			push(q1, q2, q3, q4, q5, tmp, priority);
 			break;
 		case 2:
-			//priority = selectPriority();
 			printQueuePrioirity(q1, q2, q3, q4, q5);
 			break;
 		case 3:
 			printCommonQueue(q1, q2, q3, q4, q5);
-			break;
+			return;
 		case 4:
+			changePriority(q1, q2, q3, q4, q5);
+
 			break;
 		case 5:
 			return;
@@ -257,6 +401,7 @@ void loopQueue()
 int main()
 {
 	system("chcp 1251"); system("cls");
+	
 
 	loopQueue();
 

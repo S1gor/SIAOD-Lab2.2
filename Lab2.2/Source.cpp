@@ -104,7 +104,7 @@ void push(Queue1& q1, Queue2& q2, Queue3& q3, Queue4& q4, Queue5& q5, int d, int
 	}
 }
 
-void printQueuePrioirity(Queue1& q1, Queue2& q2, Queue3& q3, Queue4& q4, Queue5& q5)
+void printQueuePrioirity(Queue1 q1, Queue2 q2, Queue3 q3, Queue4 q4, Queue5 q5)
 {
 	printf("1: ");
 	if (q1.head == NULL)
@@ -158,7 +158,7 @@ void printQueuePrioirity(Queue1& q1, Queue2& q2, Queue3& q3, Queue4& q4, Queue5&
 	printf("\n");
 }
 
-void printCommonQueue(Queue1& q1, Queue2& q2, Queue3& q3, Queue4& q4, Queue5& q5)
+void printCommonQueue(Queue1 q1, Queue2 q2, Queue3 q3, Queue4 q4, Queue5 q5)
 {
 	if (q5.head != NULL)
 		q5.tail->next = q4.head;
